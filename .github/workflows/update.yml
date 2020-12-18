@@ -1,0 +1,30 @@
+name: update
+env:
+  TZ: 'Asia/Tokyo'
+on:
+  schedule:
+    - cron: '35 16 * * *'
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: update
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
+      - name: update
+        run: |
+          dotnet run -p ./Shukujitsu.DatesGenerator/Shukujitsu.DatesGenerator.csproj
+          git diff --exit-code --quit %% exit
+          git config --global user.name kbms0x07
+          git config --global user.email mkobayashi0x07@gmail.com
+          git add ./Shukujitsu/Dates.cs
+          git commit -m 'update Dates.cs'
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: update Dates.cs
