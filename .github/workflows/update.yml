@@ -1,9 +1,8 @@
 name: update
-env:
-  TZ: 'Asia/Tokyo'
+
 on:
   schedule:
-    - cron: '35 16 * * *'
+    - cron: '5 0 * * 1'
   workflow_dispatch:
 
 jobs:
@@ -19,7 +18,7 @@ jobs:
       - name: update
         run: |
           dotnet run -p ./Shukujitsu.DatesGenerator/Shukujitsu.DatesGenerator.csproj
-          git diff --exit-code --quit %% exit
+          git diff --exit-code --quiet %% exit
           git config --global user.name kbms0x07
           git config --global user.email mkobayashi0x07@gmail.com
           git add ./Shukujitsu/Dates.cs
