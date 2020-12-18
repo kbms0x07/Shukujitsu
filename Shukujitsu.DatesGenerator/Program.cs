@@ -48,7 +48,7 @@ namespace Shukujitsu.DatesGenerator
 
         static void WriteFirstPartOfCode(StringBuilder stringBuilder)
         {
-            stringBuilder.Append(@"using System;
+            stringBuilder.AppendLine(@"using System;
 using System.Collections.Generic;
 using System.Linq;
 
