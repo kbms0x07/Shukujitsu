@@ -1,18 +1,14 @@
 name: dotnet-test
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         dotnet: ['2.1.x', '3.1.x']
+    
     name: Dotnet ${{ matrix.dotnet }}
     steps:
     - uses: actions/checkout@v2
